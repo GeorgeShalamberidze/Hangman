@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'MouseMemoirs';
+	src: url('../fonts/MouseMemoirs-Regular.ttf');
+	font-style: normal;
+}
+
 *,
 ::before,
 ::after {
@@ -16,17 +22,18 @@ picture {
 	display: block;
 }
 
+body {
+	font-family: 'MouseMemoirs';
+	min-width: 320px;
+	min-height: 100vh;
+	width: 100vw;
+	display: flex;
+}
+
 input,
 button,
 textarea,
 select {
 	font-family: inherit;
 	font-size: inherit;
-}
-
-body {
-	min-width: 320px;
-	min-height: 100vh;
-	width: 100vw;
-	display: flex;
 }
