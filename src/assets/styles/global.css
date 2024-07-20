@@ -24,12 +24,11 @@ picture {
 
 body {
 	font-family: 'MouseMemoirs';
+	display: flex;
+	overflow-x: hidden;
 	min-width: 320px;
 	min-height: 100vh;
 	width: 100vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	height: 100vh;
 }
 

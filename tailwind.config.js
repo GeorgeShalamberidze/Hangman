@@ -10,6 +10,19 @@ export default {
 			colors: {
 				'dark-navy': '#261676',
 				blue: '#2463FF',
+				'light-gray': '#887DC0',
+			},
+			width: {
+				infoCardW: '24rem',
+			},
+			maxWidth: {
+				infoCardW: '24rem',
+			},
+			fontSize: {
+				headingXL: '8.5rem',
+				headingL: '5.5rem',
+				headingM: '3rem',
+				headingS: '2rem',
 			},
 		},
 	},
