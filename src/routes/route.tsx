@@ -2,6 +2,7 @@ import {
 	createBrowserRouter,
 	createRoutesFromElements,
 	Navigate,
+	Outlet,
 	Route,
 } from 'react-router-dom';
 import { GAME_PATHS, ROOT_PATHS } from './enums/index.enum';
