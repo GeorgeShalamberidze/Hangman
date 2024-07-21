@@ -10,6 +10,8 @@ const CategoryPickPageView: React.FC = () => {
 	const { categories, setChosenCategory } = useCategoryContext();
 	const navigate = useNavigate();
 
+	console.log(categories);
+
 	return (
 		<div className="max-w-screen w-full min-h-screen flex flex-col items-center pt-14 bg-slate-900 bg-opacity-70">
 			<div className="w-[90%] flex flex-col gap-5 lg:gap-10 mb-10">

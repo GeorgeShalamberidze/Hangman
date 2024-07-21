@@ -17,35 +17,32 @@ const Category: React.FC<CategoryPropTypes> = ({
 	const { categories, setCategories } = useCategoryContext();
 
 	const handleOnClick = () => {
-		if (!categories) return;
+		if (!categories || categories[categoryName].length === 0) return;
 
 		setChosenCategory(categoryName);
 
-		const category = categories[categoryName];
+		const category = categories[categoryName].filter((item) => !item.selected);
 		const randomI = Math.floor(Math.random() * category.length);
 		const selectedItem = category[randomI];
-
-		console.log(selectedItem);
 
 		const updatedCategoryList = category.map((item, i) =>
 			i === randomI ? { ...item, selected: true } : item
 		);
 
-		setCategories(
-			(prev) =>
-				({
-					...prev,
-					[categoryName]: updatedCategoryList,
-				}) as CategoryData
-		);
+		const updatedCategories = {
+			...categories,
+			[categoryName]: updatedCategoryList,
+		};
+
+		setCategories(updatedCategories);
+		localStorage.setItem('categories', JSON.stringify(updatedCategories));
 
 		navigate(GAME_PATHS.HANGMAN);
-		console.log(categories);
 	};
 
 	return (
 		<div
-			className="bg-blue flex items-center justify-center text-white rounded-3xl md:rounded-[40px] h-20 md:h-36 lg:h-[180px] cursor-pointer hover:opacity-80"
+			className={`${categories?.[categoryName].length === 0 ? 'opacity-15 pointer-events-none' : 'opacity-100'} bg-blue flex items-center justify-center text-white rounded-3xl md:rounded-[40px] h-20 md:h-36 lg:h-[180px] cursor-pointer hover:opacity-80`}
 			onClick={handleOnClick}
 		>
 			<p className="text-headingS md:text-headingM">{categoryName}</p>

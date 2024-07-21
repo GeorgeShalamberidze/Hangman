@@ -7,6 +7,7 @@ import Quit from '@/assets/svg/quit-game.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { GAME_PATHS } from '@/routes/enums/index.enum';
 import useMediaQuery from '@/hooks/useMediaQueries';
+import { useCategoryContext } from '@/context/useCategoryContext';
 
 type ModalPropTypes = {
 	hideModal: () => void;
@@ -15,6 +16,7 @@ type ModalPropTypes = {
 const Modal = ({ hideModal }: ModalPropTypes) => {
 	const navigate = useNavigate();
 	const { isMobile } = useMediaQuery();
+	const { setIsNewGame } = useCategoryContext();
 	return (
 		<>
 			<div
@@ -42,7 +44,11 @@ const Modal = ({ hideModal }: ModalPropTypes) => {
 					/>
 					<Quit
 						className="w-[70%] ms:w-[40%] h-auto left-1/2 -translate-x-1/2 absolute bottom-[15%] cursor-pointer hover:opacity-75"
-						onClick={() => navigate(GAME_PATHS.MAIN_MENU)}
+						onClick={() => {
+							localStorage.removeItem('categories');
+							setIsNewGame(false);
+							navigate(GAME_PATHS.MAIN_MENU);
+						}}
 					/>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import HowToPlayButtonHover from '@/assets/svg/how-to-play-hover.svg?react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GAME_PATHS } from '@/routes/enums/index.enum';
+import { useCategoryContext } from '@/context/useCategoryContext';
 
 const MainMenuPageView: React.FC = () => {
 	const [isPlayButtonHovered, setIsPlayButtonHovered] =
@@ -14,6 +15,7 @@ const MainMenuPageView: React.FC = () => {
 	const [isHowToPlayButtonHovered, setIsHowToPlayButtonHovered] =
 		useState<boolean>(false);
 	const navigate = useNavigate();
+	const { setIsNewGame } = useCategoryContext();
 
 	return (
 		<div className="w-screen h-screen flex flex-col items-center justify-center">
@@ -24,7 +26,10 @@ const MainMenuPageView: React.FC = () => {
 					className="absolute w-fit h-[200px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
 					onMouseEnter={() => setIsPlayButtonHovered(true)}
 					onMouseLeave={() => setIsPlayButtonHovered(false)}
-					onClick={() => navigate(GAME_PATHS.CATEGORY_PICK)}
+					onClick={() => {
+						navigate(GAME_PATHS.CATEGORY_PICK);
+						setIsNewGame(true);
+					}}
 				>
 					{isPlayButtonHovered ? (
 						<PlayButtonHover className="w-full h-full" />
