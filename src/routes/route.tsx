@@ -12,6 +12,7 @@ import RootLayout from '@/layout/rootLayout';
 import HowToPlayPageView from '@/pages/about';
 import CategoryPickPageView from '@/pages/category-pick';
 import HangmanPageView from '@/pages/hangman';
+import ProtectedRoute from '@/components/protectedRoute';
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -26,7 +27,14 @@ export const router = createBrowserRouter(
 				path={GAME_PATHS.CATEGORY_PICK}
 				element={<CategoryPickPageView />}
 			/>
-			<Route path={GAME_PATHS.HANGMAN} element={<HangmanPageView />} />
+			<Route
+				path={GAME_PATHS.HANGMAN}
+				element={
+					<ProtectedRoute>
+						<HangmanPageView />
+					</ProtectedRoute>
+				}
+			/>
 
 			<Route
 				path={ROOT_PATHS.ROOT}
