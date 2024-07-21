@@ -14,8 +14,7 @@ const Category: React.FC<CategoryPropTypes> = ({
 	setChosenCategory,
 }) => {
 	const navigate = useNavigate();
-	const { categories, setCategories } = useCategoryContext();
-
+	const { categories, setCategories, setWord } = useCategoryContext();
 	const handleOnClick = () => {
 		if (!categories || categories[categoryName].length === 0) return;
 
@@ -35,8 +34,9 @@ const Category: React.FC<CategoryPropTypes> = ({
 		};
 
 		setCategories(updatedCategories);
-		localStorage.setItem('categories', JSON.stringify(updatedCategories));
+		setWord(selectedItem?.name);
 
+		localStorage.setItem('categories', JSON.stringify(updatedCategories));
 		navigate(GAME_PATHS.HANGMAN);
 	};
 

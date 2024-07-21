@@ -1,13 +1,13 @@
 import { Alphabet } from '@/constants/alphabet';
 import { SetStateAction } from 'react';
 
-type LetterPropTypes = {
+type KeyboardLetterPropTypes = {
 	value: string;
 	selected: boolean;
 	setAlphabet: React.Dispatch<SetStateAction<Alphabet[]>>;
 };
 
-const Letter: React.FC<LetterPropTypes> = ({
+const KeyboardLetter: React.FC<KeyboardLetterPropTypes> = ({
 	value,
 	selected,
 	setAlphabet,
@@ -30,4 +30,4 @@ const Letter: React.FC<LetterPropTypes> = ({
 	);
 };
 
-export default Letter;
+export default KeyboardLetter;

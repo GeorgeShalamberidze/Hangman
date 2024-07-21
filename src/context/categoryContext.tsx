@@ -52,6 +52,8 @@ const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		}
 	}, [isNewGame]);
 
+	console.log(word);
+
 	return (
 		<CategoryContext.Provider
 			value={{
