@@ -8,12 +8,14 @@ const HangmanPageView: React.FC = () => {
 	const { hideModal, showModal, isModalOpen } = useModal();
 
 	return (
-		<div className="text-headingXL text-white flex h-screen w-full flex-col items-center justify-center">
-			{chosenCategory}
-			<BurgerMenu
-				onClick={showModal}
-				className="cursor-pointer hover:opacity-85"
-			/>
+		<div className="text-headingXL text-white flex h-screen flex-col w-[80%] mx-auto">
+			<div className="flex items-center gap-14">
+				<BurgerMenu
+					onClick={showModal}
+					className="cursor-pointer hover:opacity-85"
+				/>
+				<p className="text-headingL">{chosenCategory}</p>
+			</div>
 			{isModalOpen ? <Modal hideModal={hideModal} /> : null}
 		</div>
 	);

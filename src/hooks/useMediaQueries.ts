@@ -6,7 +6,7 @@ const useMediaQuery = (heighBreakpoint?: number) => {
 
 	useEffect(() => {
 		const widthListener = () => {
-			if (window.innerWidth <= 578) {
+			if (window.innerWidth <= 600) {
 				setIsMobile(true);
 			} else {
 				setIsMobile(false);
