@@ -10,7 +10,10 @@ const HangmanPageView: React.FC = () => {
 	return (
 		<div className="text-headingXL text-white flex h-screen w-full flex-col items-center justify-center">
 			{chosenCategory}
-			<BurgerMenu onClick={showModal} className="cursor-pointer" />
+			<BurgerMenu
+				onClick={showModal}
+				className="cursor-pointer hover:opacity-85"
+			/>
 			{isModalOpen ? <Modal hideModal={hideModal} /> : null}
 		</div>
 	);

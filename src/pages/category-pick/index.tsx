@@ -10,7 +10,7 @@ const CategoryPickPageView: React.FC = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="max-w-screen w-full min-h-screen flex flex-col items-center pt-10 bg-slate-900 bg-opacity-70">
+		<div className="max-w-screen w-full min-h-screen flex flex-col items-center pt-20 bg-slate-900 bg-opacity-70">
 			<div className="w-[90%] flex flex-col gap-5 lg:gap-20 mb-10">
 				<div className="flex relative justify-end md:justify-center items-start w-full mb-3">
 					<BackButton
