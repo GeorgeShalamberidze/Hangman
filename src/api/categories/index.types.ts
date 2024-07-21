@@ -1,10 +1,10 @@
-export type ItemType = {
+export type CategoryItem = {
 	name: string;
 	selected: boolean;
 };
 
 export type CategoryType =
-	| 'Animal'
+	| 'Animals'
 	| 'Capital Cities'
 	| 'Countries'
 	| 'Movies'
@@ -12,7 +12,7 @@ export type CategoryType =
 	| 'TV Shows';
 
 export type CategoryData = {
-	[key in CategoryType]: ItemType[];
+	[key in CategoryType]: CategoryItem[];
 };
 
 export type CategoryDataResponse = {

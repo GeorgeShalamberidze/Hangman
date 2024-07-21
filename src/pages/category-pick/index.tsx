@@ -4,14 +4,15 @@ import { ROOT_PATHS } from '@/routes/enums/index.enum';
 import BackButton from '@/assets/svg/back-button.svg?react';
 import PickCategoryBoard from '@/assets/svg/pick-a-category.svg?react';
 import Category from '@/components/category';
+import { CategoryType } from '@/api/categories/index.types';
 
 const CategoryPickPageView: React.FC = () => {
 	const { categories, setChosenCategory } = useCategoryContext();
 	const navigate = useNavigate();
 
 	return (
-		<div className="max-w-screen w-full min-h-screen flex flex-col items-center pt-20 bg-slate-900 bg-opacity-70">
-			<div className="w-[90%] flex flex-col gap-5 lg:gap-20 mb-10">
+		<div className="max-w-screen w-full min-h-screen flex flex-col items-center pt-14 bg-slate-900 bg-opacity-70">
+			<div className="w-[90%] flex flex-col gap-5 lg:gap-10 mb-10">
 				<div className="flex relative justify-end md:justify-center items-start w-full mb-3">
 					<BackButton
 						className="absolute -left-5 sm:left-0 cursor-pointer hover:opacity-70 h-[35px] md:h-16 lg:h-[92px]"
@@ -26,7 +27,7 @@ const CategoryPickPageView: React.FC = () => {
 							return (
 								<Category
 									key={i}
-									categoryName={category}
+									categoryName={category as CategoryType}
 									setChosenCategory={setChosenCategory}
 								/>
 							);

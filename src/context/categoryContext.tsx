@@ -1,22 +1,34 @@
 import { getCategoriesData } from '@/api/categories/api';
-import { CategoryData } from '@/api/categories/index.types';
-import { createContext, PropsWithChildren, useEffect, useState } from 'react';
+import { CategoryData, CategoryType } from '@/api/categories/index.types';
+import {
+	createContext,
+	PropsWithChildren,
+	SetStateAction,
+	useEffect,
+	useState,
+} from 'react';
 
 type CategoryContextType = {
-	categories: CategoryData | [];
-	chosenCategory: string | undefined;
-	setChosenCategory: React.Dispatch<React.SetStateAction<string | undefined>>;
+	categories: CategoryData | undefined;
+	chosenCategory: CategoryType | undefined;
+	setChosenCategory: React.Dispatch<
+		React.SetStateAction<CategoryType | undefined>
+	>;
+	setCategories: React.Dispatch<SetStateAction<CategoryData | undefined>>;
 };
 
 export const CategoryContext = createContext<CategoryContextType>({
-	categories: [],
+	categories: undefined,
 	chosenCategory: undefined,
 	setChosenCategory: (): void => undefined,
+	setCategories: (): void => undefined,
 });
 
 const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
-	const [categories, setCategories] = useState<CategoryData | []>([]);
-	const [chosenCategory, setChosenCategory] = useState<string | undefined>();
+	const [categories, setCategories] = useState<CategoryData | undefined>();
+	const [chosenCategory, setChosenCategory] = useState<
+		CategoryType | undefined
+	>();
 
 	useEffect(() => {
 		getCategoriesData().then((res) => {
@@ -30,6 +42,7 @@ const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 				categories,
 				chosenCategory,
 				setChosenCategory,
+				setCategories,
 			}}
 		>
 			{children}
