@@ -64,7 +64,7 @@ const Modal: React.FC<ModalPropTypes> = ({ hideModal, gameState }) => {
 						/>
 					)}
 					<NewCategory
-						className="w-[80%] ms:w-1/2 h-auto left-1/2 -translate-x-1/2 absolute bottom-[35%] cursor-pointer hover:opacity-75"
+						className="w-[90%] xs:w-[80%] ms:w-1/2 h-auto left-1/2 -translate-x-1/2 absolute bottom-[35%] cursor-pointer hover:opacity-75"
 						onClick={() => navigate(GAME_PATHS.CATEGORY_PICK)}
 					/>
 					<Quit

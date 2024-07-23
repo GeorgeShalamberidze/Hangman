@@ -24,7 +24,7 @@ const HealthBar: React.FC<HealthBarPropTyps> = ({ incorrectLetterCount }) => {
 					className="h-[15px] bg-dark-navy rounded-3xl"
 				></div>
 			</div>
-			<div className="items-center flex">
+			<div className="items-center hidden xs:flex">
 				<Heart className="w-full h-auto" />
 			</div>
 		</div>

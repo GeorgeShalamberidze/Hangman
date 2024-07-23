@@ -21,12 +21,12 @@ const HangmanPageView: React.FC = () => {
 
 	return (
 		<div className="h-screen w-full bg-slate-900 bg-opacity-70">
-			<div className="text-headingXL text-white flex h-screen flex-col w-[80%] mx-auto">
-				<div className="flex justify-between">
-					<div className="flex items-center gap-14 mb-5">
+			<div className="text-headingXL text-white flex h-screen flex-col w-[90%] ms:w-[90%] mx-auto">
+				<div className="flex justify-between mb-8 gap-10">
+					<div className="flex items-center gap-4 xs:gap-8 sm:gap-14">
 						<BurgerMenu
 							onClick={showModal}
-							className="cursor-pointer hover:opacity-85 h-10 sm:h-20"
+							className="cursor-pointer hover:opacity-85 h-8 xs:h-10 sm:h-20"
 						/>
 						<p className="text-headingM sm:text-headingL">{chosenCategory}</p>
 					</div>
@@ -36,17 +36,17 @@ const HangmanPageView: React.FC = () => {
 				</div>
 
 				<div className="flex flex-col gap-16">
-					<div className="flex gap-3 w-[80%] mx-auto">
-						<div className="flex">
+					<div className="flex gap-3 w-full mx-auto items-center justify-center">
+						<div className="flex gap-y-4 gap-x-20 flex-wrap items-center justify-center">
 							{word?.split(' ').map((letter, i) => {
 								return (
-									<div className="flex">
-										{letter.split('').map((lett) => (
+									<div className="flex gap-4 flex-wrap" key={i}>
+										{letter.split('').map((lett, ii) => (
 											<HangmanLetter
-												key={i}
-												letter={letter}
+												key={ii}
+												letter={lett}
 												isCorrect={selectedAlphabet.includes(
-													letter.toLocaleLowerCase()
+													lett.toLocaleLowerCase()
 												)}
 											/>
 										))}
@@ -54,20 +54,9 @@ const HangmanPageView: React.FC = () => {
 								);
 							})}
 						</div>
-						{/* {word?.split('').map((letter, i) => {
-							return (
-								<HangmanLetter
-									key={i}
-									letter={letter}
-									isCorrect={selectedAlphabet.includes(
-										letter.toLocaleLowerCase()
-									)}
-								/>
-							);
-						})} */}
 					</div>
 
-					<div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3">
+					<div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3 w-[90%] mx-auto">
 						{alphabet.map((letter, i) => (
 							<KeyboardLetter
 								key={i}
