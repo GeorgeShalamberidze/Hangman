@@ -19,11 +19,11 @@ const MainMenuPageView: React.FC = () => {
 
 	return (
 		<div className="w-screen h-screen flex flex-col items-center justify-center">
-			<div className="relative w-fit">
-				<BoardRect className="h-[500px] w-full" />
-				<HangmanBoard className="absolute h-[185px] w-full left-1/2 -translate-x-1/2 -top-20" />
+			<div className="relative w-fit h-auto max-w-[95%]">
+				<BoardRect className="max-h-[500px] w-full h-auto" />
+				<HangmanBoard className="w-[60%] h-auto absolute left-1/2 -translate-x-1/2 bottom-[80%]" />
 				<div
-					className="absolute w-fit h-[200px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+					className="absolute w-full flex justify-center h-auto top-[47%] left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
 					onMouseEnter={() => setIsPlayButtonHovered(true)}
 					onMouseLeave={() => setIsPlayButtonHovered(false)}
 					onClick={() => {
@@ -32,14 +32,14 @@ const MainMenuPageView: React.FC = () => {
 					}}
 				>
 					{isPlayButtonHovered ? (
-						<PlayButtonHover className="w-full h-full" />
+						<PlayButtonHover className="w-1/3 h-full" />
 					) : (
-						<PlayButtonDefault className="w-full h-full" />
+						<PlayButtonDefault className="w-[40%] h-full" />
 					)}
 				</div>
 
 				<div
-					className="absolute w-fit h-[62px] bottom-10 left-1/2 -translate-x-1/2 cursor-pointer"
+					className="absolute w-fit h-[62px] bottom-[7%] left-1/2 -translate-x-1/2 cursor-pointer"
 					onMouseEnter={() => setIsHowToPlayButtonHovered(true)}
 					onMouseLeave={() => setIsHowToPlayButtonHovered(false)}
 					onClick={() => navigate(GAME_PATHS.HOW_TO_PLAY)}

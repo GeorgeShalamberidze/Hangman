@@ -20,7 +20,7 @@ const HangmanPageView: React.FC = () => {
 	).length;
 
 	return (
-		<div className="h-screen w-full bg-slate-900 bg-opacity-70">
+		<div className="h-screen w-full bg-slate-900 bg-opacity-70 overflow-auto">
 			<div className="text-headingXL text-white flex h-screen flex-col w-[90%] ms:w-[90%] mx-auto">
 				<div className="flex justify-between mb-8 gap-10">
 					<div className="flex items-center gap-4 xs:gap-8 sm:gap-14">
@@ -35,7 +35,7 @@ const HangmanPageView: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-16">
+				<div className="flex flex-col gap-16 pb-10">
 					<div className="flex gap-3 w-full mx-auto items-center justify-center">
 						<div className="flex gap-y-4 gap-x-20 flex-wrap items-center justify-center">
 							{word?.split(' ').map((letter, i) => {
