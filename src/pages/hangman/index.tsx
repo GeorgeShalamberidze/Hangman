@@ -6,6 +6,7 @@ import { useCategoryContext } from '@/context/useCategoryContext';
 import { Alphabet, ALPHABET } from '@/constants/alphabet';
 import { useState } from 'react';
 import HangmanLetter from '@/components/hangmanLetter';
+import HealthBar from '@/components/healthBar';
 
 const HangmanPageView: React.FC = () => {
 	const { chosenCategory, word } = useCategoryContext();
@@ -17,19 +18,28 @@ const HangmanPageView: React.FC = () => {
 		.filter((letter) => letter.selected)
 		.map((letter) => letter.value.toLocaleLowerCase());
 
+	const incorrectLetterCount = selectedAlphabet.filter(
+		(lett) => !word?.includes(lett.toLocaleLowerCase())
+	).length;
+
 	return (
 		<div className="h-screen w-full bg-slate-900 bg-opacity-70">
 			<div className="text-headingXL text-white flex h-screen flex-col w-[80%] mx-auto">
-				<div className="flex items-center gap-14 mb-5">
-					<BurgerMenu
-						onClick={showModal}
-						className="cursor-pointer hover:opacity-85 h-10 sm:h-20"
-					/>
-					<p className="text-headingM sm:text-headingL">{chosenCategory}</p>
+				<div className="flex justify-between">
+					<div className="flex items-center gap-14 mb-5">
+						<BurgerMenu
+							onClick={showModal}
+							className="cursor-pointer hover:opacity-85 h-10 sm:h-20"
+						/>
+						<p className="text-headingM sm:text-headingL">{chosenCategory}</p>
+					</div>
+					<div className="flex flex-1">
+						<HealthBar incorrectLetterCount={incorrectLetterCount} />
+					</div>
 				</div>
 
-				<div className="flex flex-col gap-10">
-					<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+				<div className="flex flex-col gap-16">
+					<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 w-[80%] mx-auto">
 						{word?.split('').map((letter, i) => {
 							return (
 								<HangmanLetter

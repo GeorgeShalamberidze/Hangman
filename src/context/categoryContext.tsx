@@ -13,6 +13,8 @@ type CategoryContextType = {
 	chosenCategory: CategoryType | undefined;
 	word: string | undefined;
 	isNewGame: boolean;
+	health: number;
+	setHealth: React.Dispatch<SetStateAction<number>>;
 	setChosenCategory: React.Dispatch<
 		React.SetStateAction<CategoryType | undefined>
 	>;
@@ -26,11 +28,15 @@ export const CategoryContext = createContext<CategoryContextType>({
 	chosenCategory: undefined,
 	word: undefined,
 	isNewGame: false,
+	health: 0,
+	setHealth: (): void => undefined,
 	setChosenCategory: (): void => undefined,
 	setCategories: (): void => undefined,
 	setWord: (): void => undefined,
 	setIsNewGame: (): void => undefined,
 });
+
+export const MAX_HEALTH = 8;
 
 const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [categories, setCategories] = useState<CategoryData | undefined>();
@@ -40,6 +46,7 @@ const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [word, setWord] = useState<string | undefined>();
 	const storedCategories = localStorage.getItem('categories');
 	const [isNewGame, setIsNewGame] = useState<boolean>(false);
+	const [health, setHealth] = useState<number>(MAX_HEALTH);
 
 	useEffect(() => {
 		if (storedCategories) {
@@ -52,8 +59,6 @@ const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		}
 	}, [isNewGame]);
 
-	console.log(word);
-
 	return (
 		<CategoryContext.Provider
 			value={{
@@ -61,6 +66,8 @@ const CategoryProvider: React.FC<PropsWithChildren> = ({ children }) => {
 				categories,
 				chosenCategory,
 				isNewGame,
+				health,
+				setHealth,
 				setIsNewGame,
 				setChosenCategory,
 				setCategories,
