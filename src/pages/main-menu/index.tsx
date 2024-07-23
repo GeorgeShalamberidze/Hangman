@@ -32,7 +32,7 @@ const MainMenuPageView: React.FC = () => {
 					}}
 				>
 					{isPlayButtonHovered ? (
-						<PlayButtonHover className="w-1/3 h-full" />
+						<PlayButtonHover className="w-[40%] h-full" />
 					) : (
 						<PlayButtonDefault className="w-[40%] h-full" />
 					)}
