@@ -1,7 +1,10 @@
 import ModalBoard from '@/assets/svg/modalBoard.svg?react';
 import ModalBoardSmall from '@/assets/svg/modalBoard-small.svg?react';
 import Paused from '@/assets/svg/paused.svg?react';
+import YouLost from '@/assets/svg/you-lose.svg?react';
+import YouWin from '@/assets/svg/you-win.svg?react';
 import Continue from '@/assets/svg/continue.svg?react';
+import PlayAgain from '@/assets/svg/play-again.svg?react';
 import NewCategory from '@/assets/svg/new-category.svg?react';
 import Quit from '@/assets/svg/quit-game.svg?react';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +14,15 @@ import { useCategoryContext } from '@/context/useCategoryContext';
 
 type ModalPropTypes = {
 	hideModal: () => void;
+	gameState: 'paused' | 'lost' | 'won';
 };
 
-const Modal = ({ hideModal }: ModalPropTypes) => {
+const Modal: React.FC<ModalPropTypes> = ({ hideModal, gameState }) => {
 	const navigate = useNavigate();
 	const { isMobile } = useMediaQuery();
-	const { setIsNewGame } = useCategoryContext();
+	const { setIsNewGame, handlePlayAgainClick, chosenCategory } =
+		useCategoryContext();
+
 	return (
 		<>
 			<div
@@ -33,11 +39,30 @@ const Modal = ({ hideModal }: ModalPropTypes) => {
 					) : (
 						<ModalBoard className="w-full h-auto max-h-[445px]" />
 					)}
-					<Paused className="w-[70%] ms:w-1/2 h-auto absolute left-1/2 -translate-x-1/2 bottom-[90%] ms:bottom-[86%]" />
-					<Continue
-						className="w-[70%] ms:w-[40%] h-auto left-1/2 -translate-x-1/2 absolute bottom-[55%] cursor-pointer hover:opacity-75"
-						onClick={hideModal}
-					/>
+					{gameState === 'paused' ? (
+						<Paused className="w-[70%] ms:w-1/2 h-auto absolute left-1/2 -translate-x-1/2 bottom-[90%] ms:bottom-[86%]" />
+					) : gameState === 'lost' ? (
+						<YouLost className="w-[70%] ms:w-1/2 h-auto absolute left-1/2 -translate-x-1/2 bottom-[90%] ms:bottom-[86%]" />
+					) : (
+						<YouWin className="w-[70%] ms:w-1/2 h-auto absolute left-1/2 -translate-x-1/2 bottom-[90%] ms:bottom-[86%]" />
+					)}
+					{gameState === 'paused' ? (
+						<Continue
+							className="w-[70%] ms:w-[40%] h-auto left-1/2 -translate-x-1/2 absolute bottom-[55%] cursor-pointer hover:opacity-75"
+							onClick={hideModal}
+						/>
+					) : (
+						<PlayAgain
+							className="w-[70%] ms:w-[40%] h-auto left-1/2 -translate-x-1/2 absolute bottom-[55%] cursor-pointer hover:opacity-75"
+							onClick={() => {
+								if (!chosenCategory) {
+									navigate(GAME_PATHS.CATEGORY_PICK);
+								} else {
+									handlePlayAgainClick();
+								}
+							}}
+						/>
+					)}
 					<NewCategory
 						className="w-[80%] ms:w-1/2 h-auto left-1/2 -translate-x-1/2 absolute bottom-[35%] cursor-pointer hover:opacity-75"
 						onClick={() => navigate(GAME_PATHS.CATEGORY_PICK)}

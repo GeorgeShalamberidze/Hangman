@@ -3,16 +3,13 @@ import useModal from '@/hooks/useModal';
 import BurgerMenu from '@/assets/svg/burger.svg?react';
 import KeyboardLetter from '@/components/keyboardLetter';
 import { useCategoryContext } from '@/context/useCategoryContext';
-import { Alphabet, ALPHABET } from '@/constants/alphabet';
-import { useState } from 'react';
 import HangmanLetter from '@/components/hangmanLetter';
 import HealthBar from '@/components/healthBar';
 
 const HangmanPageView: React.FC = () => {
-	const { chosenCategory, word } = useCategoryContext();
+	const { chosenCategory, word, health, alphabet, isGameWon, setAlphabet } =
+		useCategoryContext();
 	const { hideModal, showModal, isModalOpen } = useModal();
-
-	const [alphabet, setAlphabet] = useState<Alphabet[]>(ALPHABET);
 
 	const selectedAlphabet = alphabet
 		.filter((letter) => letter.selected)
@@ -39,8 +36,25 @@ const HangmanPageView: React.FC = () => {
 				</div>
 
 				<div className="flex flex-col gap-16">
-					<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 w-[80%] mx-auto">
-						{word?.split('').map((letter, i) => {
+					<div className="flex gap-3 w-[80%] mx-auto">
+						<div className="flex">
+							{word?.split(' ').map((letter, i) => {
+								return (
+									<div className="flex">
+										{letter.split('').map((lett) => (
+											<HangmanLetter
+												key={i}
+												letter={letter}
+												isCorrect={selectedAlphabet.includes(
+													letter.toLocaleLowerCase()
+												)}
+											/>
+										))}
+									</div>
+								);
+							})}
+						</div>
+						{/* {word?.split('').map((letter, i) => {
 							return (
 								<HangmanLetter
 									key={i}
@@ -50,7 +64,7 @@ const HangmanPageView: React.FC = () => {
 									)}
 								/>
 							);
-						})}
+						})} */}
 					</div>
 
 					<div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3">
@@ -64,7 +78,14 @@ const HangmanPageView: React.FC = () => {
 						))}
 					</div>
 				</div>
-				{isModalOpen ? <Modal hideModal={hideModal} /> : null}
+				{isModalOpen ? (
+					<Modal gameState="paused" hideModal={hideModal} />
+				) : null}
+				{health === 0 ? (
+					<Modal gameState="lost" hideModal={hideModal} />
+				) : health > 0 && isGameWon ? (
+					<Modal gameState="won" hideModal={hideModal} />
+				) : null}
 			</div>
 		</div>
 	);

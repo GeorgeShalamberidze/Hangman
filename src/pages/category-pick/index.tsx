@@ -7,7 +7,7 @@ import Category from '@/components/category';
 import { CategoryType } from '@/api/categories/index.types';
 
 const CategoryPickPageView: React.FC = () => {
-	const { categories, setChosenCategory } = useCategoryContext();
+	const { categories } = useCategoryContext();
 	const navigate = useNavigate();
 
 	return (
@@ -25,11 +25,7 @@ const CategoryPickPageView: React.FC = () => {
 					{categories &&
 						Object.keys(categories).map((category, i) => {
 							return (
-								<Category
-									key={i}
-									categoryName={category as CategoryType}
-									setChosenCategory={setChosenCategory}
-								/>
+								<Category key={i} categoryName={category as CategoryType} />
 							);
 						})}
 				</div>
